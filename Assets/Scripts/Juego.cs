@@ -18,13 +18,12 @@ public class Juego : MonoBehaviour
 
     public void IniciarJuego()
     {
-        tablero.Inicializar();
+        tablero.Inicializar(this);
         foreach (var jugador in jugadores)
         {
             jugador.posicionActual = tablero.casillas[0];
             jugador.tablero = tablero;
         }
-        ActualizarUI();
     }
 
     public void FinalizarJuego(Jugador ganador)
@@ -44,13 +43,8 @@ public class Juego : MonoBehaviour
         else
         {
             jugadorActual = (jugadorActual + 1) % jugadores.Count;
-            ActualizarUI();
-        }
-    }
 
-    private void ActualizarUI()
-    {
-        // Actualizar la interfaz de usuario con el jugador actual y otros detalles
+        }
     }
 
 }

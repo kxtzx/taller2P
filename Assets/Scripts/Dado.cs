@@ -13,8 +13,21 @@ public class Dado : MonoBehaviour
     public void LanzarDado()
     {
         int resultado = Random.Range(0, carasDado.Length);
-        image.sprite = carasDado[resultado];
+        MostrarResultado(resultado);
         juego.MoverJugadorActual(resultado + 1);
     }
+
+    private void MostrarResultado(int resultado)
+    {
+        if (resultado >= 0 && resultado < carasDado.Length)
+        {
+            image.sprite = carasDado[resultado];
+        }
+        else
+        {
+            Debug.LogError("El resultado del lanzamiento de dado está fuera de rango.");
+        }
+    }
+
 
 }

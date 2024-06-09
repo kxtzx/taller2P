@@ -15,19 +15,26 @@ public class Casilla : MonoBehaviour
 
     public TipoCasilla tipoCasilla;
     public int desplazamiento;
+    public Transform destino; // Referencia al transform de destino para Subir y Bajar
 
     public void AplicarEfecto(Jugador jugador)
     {
         switch (tipoCasilla)
         {
             case TipoCasilla.Subir:
-                jugador.Mover(desplazamiento);
+                if (destino != null)
+                    jugador.transform.position = destino.position; // Mover el jugador al destino
+                else
+                    Debug.LogError("No se ha asignado un destino para la casilla de tipo Subir.");
                 break;
             case TipoCasilla.Bajar:
-                jugador.Mover(-desplazamiento);
+                if (destino != null)
+                    jugador.transform.position = destino.position; // Mover el jugador al destino
+                else
+                    Debug.LogError("No se ha asignado un destino para la casilla de tipo Bajar.");
                 break;
             case TipoCasilla.VolverAlInicio:
-                jugador.Mover(-jugador.GetCasillaActual());
+                jugador.transform.position = Vector3.zero; // Mover el jugador al origen
                 break;
             case TipoCasilla.OtroTurno:
                 jugador.tablero.juego.dado.LanzarDado(); // Permitir al jugador lanzar el dado nuevamente
